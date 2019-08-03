@@ -24,13 +24,13 @@
 		"required": false
       },
       "BITBUCKET_TOKEN": {
-        "description": "Bitbucket access token https://bitbucket.org/account/user/USERUID/app-passwords.",
+        "description": "Bitbucket access token https://bitbucket.org/account/.",
 		"required": false
       },
       "GITEA_TOKEN": {
         "description": "Gitea access token https://gitea.com/user/settings/applications.",
 		"required": false
-      },
+      }
     },
     "formation": {
       "worker": {
