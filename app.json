@@ -14,7 +14,7 @@
     "repository": "https://github.com/inbalboa/github2mirror",
     "env": {
       "GIT_USER": {
-        "description": "Username (must be the same on Github and others)."
+        "description": "Username (must be the same for Github and others)."
       },
       "GITHUB_TOKEN": {
         "description": "Github access token https://github.com/settings/tokens."
@@ -32,15 +32,12 @@
 		"required": false
       }
     },
-    "formation": {
-      "worker": {
-        "quantity": 1,
-        "size": "free"
-      }
-    },
+    "addons": [
+    	"scheduler"
+  	],
     "buildpacks": [
       {
         "url": "https://github.com/chrismytton/heroku-buildpack-jq"
       }
     ]
-  }
+}
