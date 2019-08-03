@@ -14,33 +14,30 @@
     "repository": "https://github.com/inbalboa/github2mirror",
     "env": {
       "GIT_USER": {
-        "description": "Username (must be the same on Github & others)."
+        "description": "Username (must be the same for Github and others)."
       },
       "GITHUB_TOKEN": {
-        "description": "Github access token (https://github.com/settings/tokens)."
+        "description": "Github access token https://github.com/settings/tokens."
       },
       "GITLAB_TOKEN": {
-        "description": "Gitlab access token (https://gitlab.com/profile/personal_access_tokens).",
+        "description": "Gitlab access token https://gitlab.com/profile/personal_access_tokens.",
 		"required": false
       },
       "BITBUCKET_TOKEN": {
-        "description": "Bitbucket access token (https://bitbucket.org/account/user/{user-uid}/app-passwords).",
+        "description": "Bitbucket access token https://bitbucket.org/account/.",
 		"required": false
       },
       "GITEA_TOKEN": {
-        "description": "Gitea access token (https://gitea.com/user/settings/applications).",
+        "description": "Gitea access token https://gitea.com/user/settings/applications.",
 		"required": false
-      },
-    },
-    "formation": {
-      "worker": {
-        "quantity": 1,
-        "size": "free"
       }
     },
+    "addons": [
+    	"scheduler"
+  	],
     "buildpacks": [
       {
         "url": "https://github.com/chrismytton/heroku-buildpack-jq"
       }
     ]
-  }
+}
