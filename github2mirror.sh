@@ -1,13 +1,21 @@
 #!/usr/bin/env bash
  
 set -e
-
-reset="\033[0m"
-bold="[1m"
-yellow='[33m'
-green='[32m'
-blue='[34m'
-purple='[35m'
+if [ COLORING == 'true' ]; then
+	reset='\033[0m'
+	bold='[1m'
+	yellow='[33m'
+	green='[32m'
+	blue='[34m'
+	purple='[35m'
+else
+	reset=
+	bold=
+	yellow=
+	green=
+	blue=
+	purple=	
+fi
 
 get_repos() {
 	curl --silent --user ":$GITHUB_TOKEN" https://api.github.com/user/repos
