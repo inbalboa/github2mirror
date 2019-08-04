@@ -44,7 +44,7 @@ mirror_repo() {
 	fi
 	if [ $GITEA_TOKEN ]; then
 		printf "==> Cloning to ${bold}Gitea${reset}\n"
-		curl --silent --request POST "https://gitea.com/api/v1/user/repos" --header "Content-type: application/json" --header "Authorization: token $GITEA_TOKEN" --data '{"auto_init":false, "name":"$name", "private":true}' > /dev/null
+		curl --silent --request POST "https://gitea.com/api/v1/user/repos" --header "Content-type: application/json" --header "Authorization: token $GITEA_TOKEN" --data "{\"auto_init\":false, \"name\":\"$name\", \"private\":true}" > /dev/null
 		git push --mirror "https://$GIT_USER:$GITEA_TOKEN@gitea.com/$GIT_USER/${name}.git"
 	fi
 	cd ..
