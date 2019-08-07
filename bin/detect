@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo "Jq"
+exit 0
