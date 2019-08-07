@@ -5,7 +5,7 @@ set -e
 BUILD_DIR=$1
 JQ_URL=https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
 
-BIN_DIR="$BUILD_DIR/vendor/bin"
+BIN_DIR="/app/vendor/bin"
 mkdir -p "$BIN_DIR"
 export PATH=$PATH:$BIN_DIR
 curl -fsSL "$JQ_URL" -o "$BIN_DIR/jq"
