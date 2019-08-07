@@ -40,7 +40,7 @@
   	],
     "buildpacks": [
       {
-        "url": "https://github.com/chrismytton/heroku-buildpack-jq"
+        "url": "https://github.com/inbalboa/github2mirror"
       }
     ]
 }
