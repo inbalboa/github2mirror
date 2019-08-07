@@ -3,11 +3,23 @@
 set -e
 
 BUILD_DIR=$1
+PROFILE_DIR="$BUILD_DIR/.profile.d"
+VENDOR_BIN_DIR="vendor/bin"
 JQ_URL=https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
 
-PROFILE_DIR="$BUILD_DIR/.profile.d"
-BIN_DIR="$BUILD_DIR/vendor/bin"
-mkdir -p "$PROFILE_DIR" "$BIN_DIR"
-printf "export PATH=\$PATH:$BIN_DIR" > "$PROFILE_DIR/jq.sh"
-curl -fsSL "$JQ_URL" -o "$BIN_DIR/jq"
-chmod +x "$BIN_DIR/jq"
+indent() {
+  sed -u 's/^/       /'
+}
+
+progress() {
+    printf -- "-----> $1\n"
+}
+
+mkdir -p "$PROFILE_DIR" "$BUILD_DIR/$VENDOR_BIN_DIR"
+printf -- "export PATH=\$PATH:/app/$VENDOR_BIN_DIR\n" > "$PROFILE_DIR/jq.sh"
+
+progress "Downloading jq bin file"
+curl -fsSL "$JQ_URL" -o "$BUILD_DIR/$VENDOR_BIN_DIR/jq" | indent
+progress "Setting executable bit"
+chmod +x "$BUILD_DIR/$VENDOR_BIN_DIR/jq"
+progress "jq installation done"
