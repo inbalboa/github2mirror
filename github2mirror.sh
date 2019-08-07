@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
  
 set -e
+
 if [ COLORING == 'true' ]; then
 	reset='\033[0m'
 	bold='[1m'
