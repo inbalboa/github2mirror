@@ -12,11 +12,11 @@ indent() {
 }
 
 progress() {
-    printf "-----> $1\n"
+    printf -- "-----> $1\n"
 }
 
 mkdir -p "$PROFILE_DIR" "$BUILD_DIR/$VENDOR_BIN_DIR"
-printf "export PATH=\$PATH:/app/$VENDOR_BIN_DIR\n" > "$PROFILE_DIR/jq.sh"
+printf -- "export PATH=\$PATH:/app/$VENDOR_BIN_DIR\n" > "$PROFILE_DIR/jq.sh"
 
 progress "Downloading jq bin file"
 curl -fsSL "$JQ_URL" -o "$BUILD_DIR/$VENDOR_BIN_DIR/jq" | indent
