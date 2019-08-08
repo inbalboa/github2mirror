@@ -16,4 +16,4 @@ echo $PATH
 curl -fsSL "$JQ_URL" -o "$BIN_DIR/jq"
 chmod +x "$BIN_DIR/jq"
 which jq
-sleep(30)
+sleep 30
