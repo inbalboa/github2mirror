@@ -3,17 +3,15 @@
 set -e
 
 BUILD_DIR=$1
-echo "$1"
-echo "$2"
-echo "$3"
+PROFILE_DIR="$BUILD_DIR/.profile.d"
+VENDOR_BIN_DIR="vendor/bin"
 
 JQ_URL=https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
 
-BIN_DIR="/app/vendor/bin"
-mkdir -p "$BIN_DIR"
-export PATH=$PATH:$BIN_DIR
-echo $PATH
-curl -fsSL "$JQ_URL" -o "$BIN_DIR/jq"
-chmod +x "$BIN_DIR/jq"
-which jq
-sleep 30
+mkdir -p "$PROFILE_DIR" "$BUILD_DIR/$VENDOR_BIN_DIR"
+printf "export PATH=\$PATH:/app/$VENDOR_BIN_DIR" > "$PROFILE_DIR/jq.sh"
+
+curl -fsSL "$JQ_URL" -o "$BUILD_DIR/$VENDOR_BIN_DIR/jq"
+chmod +x "$BUILD_DIR/$VENDOR_BIN_DIR/jq"
+printf "PATH: $PATH"
+printf "jq location: $(which jq)"
