@@ -2,20 +2,16 @@
  
 set -e
 
-if [ COLORING == 'true' ]; then
-	reset='\033[0m'
-	bold='[1m'
-	yellow='[33m'
-	green='[32m'
-	blue='[34m'
-	purple='[35m'
-else
-	reset=
-	bold=
-	yellow=
-	green=
-	blue=
-	purple=	
+if [ -t 1 ]; then
+    ncolors=$(tput colors)
+    if [ -n "$ncolors" ] && [ $ncolors -ge 8 ]; then
+        bold="$(tput bold)"
+        reset="$(tput sgr0)"
+        green="$(tput setaf 2)"
+        yellow="$(tput setaf 3)"
+        blue="$(tput setaf 4)"
+        magenta="$(tput setaf 5)"
+    fi
 fi
 
 get_repos() {
@@ -35,10 +31,10 @@ mirror_repo() {
 	fork=$(echo "$repo_info" | cut -d'^' -f3)
 
 	if [ $fork == 'true' ]; then
-		printf "\n${bold}${yellow}==>${reset}${reset} ${bold}Repo is a fork: ${yellow}${name}${reset}${bold}. Skipped${reset}${reset}\n"
+		printf "\n${bold}${yellow}==>${reset} ${bold}Repo is a fork: ${yellow}${name}${reset}${bold}. Skipped${reset}\n"
 		return
  	fi
-	printf "\n${bold}${green}==>${reset}${reset} ${bold}Mirroring: ${green}${name}${reset}${reset}\n"
+	printf "\n${bold}${green}==>${reset} ${bold}Mirroring: ${green}${name}${reset}\n"
 	clone_url="https://$GIT_USER:$GITHUB_TOKEN@github.com/${full_name}.git"
 	git clone --quiet --bare "$clone_url"
 	cd "${name}.git"
@@ -59,10 +55,10 @@ mirror_repo() {
 	cd ..
 }
 
-printf "${bold}${blue}==> Starting to clone Github user ${purple}$GIT_USER${reset} ${bold}${blue}repos...${reset}${reset}\n"
+printf "${bold}${blue}==> Starting to clone Github user ${magenta}$GIT_USER${reset} ${bold}${blue}repos...${reset}\n"
 cd "$(mktemp -d)"
 get_repos | parse_repos |
 while read repo_info; do
 	mirror_repo "$repo_info"
 done
-printf "\n\n${bold}${green}✔ All repos successfully mirrored${reset}${reset}\n"
+printf "\n\n${bold}${green}✔ All repos successfully mirrored${reset}\n"
