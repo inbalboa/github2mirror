@@ -20,6 +20,8 @@ printf -- "export PATH=\$PATH:/app/$VENDOR_BIN_DIR\n" > "$PROFILE_DIR/jq.sh"
 
 progress "Downloading jq bin file"
 curl -fsSL "$JQ_URL" -o "$BUILD_DIR/$VENDOR_BIN_DIR/jq" | indent
+progress "Stripping"
+strip "$BUILD_DIR/$VENDOR_BIN_DIR/jq" | indent
 progress "Setting executable bit"
 chmod +x "$BUILD_DIR/$VENDOR_BIN_DIR/jq"
 progress "jq installation done"
