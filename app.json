@@ -13,10 +13,6 @@
     "website": "https://github.com/inbalboa/github2mirror",
     "repository": "https://github.com/inbalboa/github2mirror",
     "env": {
-      "COLORING": {
-        "description": "Colored output ('true' for enable).",
-		"required": false
-      },
       "GIT_USER": {
         "description": "Username (must be the same for Github and others)."
       },
