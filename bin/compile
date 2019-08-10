@@ -5,7 +5,7 @@ set -e
 BUILD_DIR=$1
 PROFILE_DIR="$BUILD_DIR/.profile.d"
 VENDOR_BIN_DIR="vendor/bin"
-JQ_URL=https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+JQ_URL=https://github.com/stedolan/jq/releases/latest/download/jq-linux64
 
 indent() {
   sed -u 's/^/       /'
