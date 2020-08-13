@@ -19,9 +19,7 @@ get_repos() {
 }
 
 parse_repos() {
-	declare raw_json=${*:-$(</dev/stdin)}
-	printf "$raw_json" |
-	jq --raw-output '.[] | "\(.name)^\(.full_name)^\(.fork)"'
+	jq --raw-output '.[] | "\(.name)^\(.full_name)^\(.fork)"' <<< "${*:-$(</dev/stdin)}"
 }
 
 mirror_repo() {
