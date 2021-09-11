@@ -6,7 +6,6 @@
       "github",
       "gitlab",
       "bitbucket",
-      "gitea",
       "mirror",
       "heroku"
     ],
