@@ -24,15 +24,15 @@ parse_repos() {
 
 mirror_repo() {
 	repo_info="$1"
-	name=$(echo "$repo_info" | cut -d'^' -f1)
-	full_name=$(echo "$repo_info" | cut -d'^' -f2)
-	fork=$(echo "$repo_info" | cut -d'^' -f3)
+	name=$(cut -d'^' -f1 <<< "$repo_info")
+	full_name=$(cut -d'^' -f2 <<< "$repo_info")
+	fork=$(cut -d'^' -f3 <<< "$repo_info")
 
 	if [ $fork == 'true' ]; then
-		printf "\n${bold}${yellow}==>${reset} ${bold}Repo is a fork: ${yellow}${name}${reset}${bold}. Skipped${reset}\n"
+		printf "\n${bold}${yellow}==>${reset} ${bold}Repo is a fork: ${yellow}%s${reset}${bold}. Skipped${reset}\n" "${name}"
 		return
  	fi
-	printf "\n${bold}${green}==>${reset} ${bold}Mirroring: ${green}${name}${reset}\n"
+	printf "\n${bold}${green}==>${reset} ${bold}Mirroring: ${green}%s${reset}\n" "${name}"
 	clone_url="https://$GIT_USER:$GITHUB_TOKEN@github.com/${full_name}.git"
 	git clone --quiet --bare "$clone_url"
 	cd "${name}.git"
@@ -53,7 +53,7 @@ mirror_repo() {
 	cd ..
 }
 
-printf "${bold}${blue}==> Starting to clone Github user ${magenta}$GIT_USER${reset} ${bold}${blue}repos...${reset}\n"
+printf "${bold}${blue}==> Starting to clone Github user ${magenta}%s${reset} ${bold}${blue}repos...${reset}\n" "$GIT_USER"
 cd "$(mktemp -d)"
 get_repos | parse_repos |
 while read repo_info; do
