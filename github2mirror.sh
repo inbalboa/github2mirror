@@ -45,11 +45,11 @@ mirror_repo() {
 		curl --silent --user "$GIT_USER:$BITBUCKET_TOKEN" --request POST "https://api.bitbucket.org/2.0/repositories/$GIT_USER/$name" --header "Content-type: application/json" --data '{"scmId":"git", "is_private":true}' > /dev/null
 		git push --force --mirror "https://$GIT_USER:$BITBUCKET_TOKEN@bitbucket.org/$GIT_USER/${name}.git"
 	fi
-	if [ $GITEA_TOKEN ]; then
-		printf "==> Cloning to ${bold}Gitea${reset}\n"
-		curl --silent --request POST "https://gitea.com/api/v1/user/repos" --header "Content-type: application/json" --header "Authorization: token $GITEA_TOKEN" --data "{\"auto_init\":false, \"name\":\"$name\", \"private\":true}" > /dev/null
-		git push --force --mirror "https://$GIT_USER:$GITEA_TOKEN@gitea.com/$GIT_USER/${name}.git"
-	fi
+	#if [ $GITEA_TOKEN ]; then
+	#	printf "==> Cloning to ${bold}Gitea${reset}\n"
+	#	curl --silent --request POST "https://gitea.com/api/v1/user/repos" --header "Content-type: application/json" --header "Authorization: token $GITEA_TOKEN" --data "{\"auto_init\":false, \"name\":\"$name\", \"private\":true}" > /dev/null
+	#	git push --force --mirror "https://$GIT_USER:$GITEA_TOKEN@gitea.com/$GIT_USER/${name}.git"
+	#fi
 	cd ..
 }
 

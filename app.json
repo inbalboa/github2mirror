@@ -1,6 +1,6 @@
 {
     "name": "Github mirror tool",
-    "description": "Mirroring Github --> Gitlab, Bitbucket, Gitea.",
+    "description": "Mirroring Github --> Gitlab, Bitbucket.",
     "keywords": [
       "git",
       "github",
@@ -24,10 +24,6 @@
       },
       "BITBUCKET_TOKEN": {
         "description": "Bitbucket access token https://bitbucket.org/account/.",
-		"required": false
-      },
-      "GITEA_TOKEN": {
-        "description": "Gitea access token https://gitea.com/user/settings/applications.",
 		"required": false
       }
     },

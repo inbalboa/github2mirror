@@ -1,6 +1,6 @@
 # Github clone tool
 
-Quick and dirty tool for mirroring Github --> Gitlab, Bitbucket, Gitea.
+Quick and dirty tool for mirroring Github --> Gitlab, Bitbucket.
 
 You can host it on [Heroku](https://www.heroku.com) for free ([account verification required](https://devcenter.heroku.com/articles/account-verification)).
 
