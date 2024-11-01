@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
- 
+
+#############################################
+######## ENV vars to define ########
+# BITBUCKET_TOKEN=
+# GITHUB_TOKEN=
+# GITLAB_TOKEN=
+# GIT_USER=
+#############################################
+
 set -e
 
 if [ -t 1 ]; then
@@ -54,6 +62,10 @@ mirror_repo() {
 }
 
 printf "${bold}${blue}==> Starting to clone Github user ${magenta}%s${reset} ${bold}${blue}repos...${reset}\n" "$GIT_USER"
+if [ -f .env ]; then
+    source .env
+fi
+
 cd "$(mktemp -d)"
 get_repos | parse_repos |
 while read repo_info; do
