@@ -27,7 +27,7 @@ get_repos() {
 }
 
 parse_repos() {
-	jq --raw-output '.[] | "\(.name)^\(.full_name)^\(.fork)"' <<< "${*:-$(</dev/stdin)}"
+	jq --raw-output '.[] | "\(.name)^\(.full_name)^\(.fork)^\(.owner.login)"' <<< "${*:-$(</dev/stdin)}"
 }
 
 mirror_repo() {
@@ -35,11 +35,18 @@ mirror_repo() {
 	name=$(cut -d'^' -f1 <<< "$repo_info")
 	full_name=$(cut -d'^' -f2 <<< "$repo_info")
 	fork=$(cut -d'^' -f3 <<< "$repo_info")
+	owner=$(cut -d'^' -f4 <<< "$repo_info")
 
 	if [ $fork == 'true' ]; then
 		printf "\n${bold}${yellow}==>${reset} ${bold}Repo is a fork: ${yellow}%s${reset}${bold}. Skipped${reset}\n" "${name}"
 		return
  	fi
+
+	if [ $owner != $GIT_USER ]; then
+		printf "\n${bold}${yellow}==>${reset} ${bold}Owner of repo is not ${GIT_USER}: ${yellow}%s${reset}${bold}. Skipped${reset}\n" "${name}"
+		return
+ 	fi
+
 	printf "\n${bold}${green}==>${reset} ${bold}Mirroring: ${green}%s${reset}\n" "${name}"
 	clone_url="https://$GIT_USER:$GITHUB_TOKEN@github.com/${full_name}.git"
 	git clone --quiet --bare "$clone_url"
